@@ -12,7 +12,18 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
-
+const MongoClient = require("mongodb").MongoClient;
+const uri =
+  "mongodb+srv://admin:admin@google-books.ilys3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+client.connect((err) => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
